@@ -24,7 +24,7 @@ const VerificarCertificado = ({ codigo }) => {
         const formData = new URLSearchParams();
         formData.append('cod', codigo);
 
-        const response = await fetch('http://172.16.67.251:8001/obtenerCertificacionPDF', {
+        const response = await fetch('https://qrback.catastrocochabamba.com/obtenerCertificacionPDF', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: formData,
