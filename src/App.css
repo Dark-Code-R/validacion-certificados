@@ -18,6 +18,9 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  -webkit-text-size-adjust: 100%; /* Previene el ajuste automático de texto en iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Contenedor principal */
@@ -25,6 +28,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow-x: hidden; /* Previene scroll horizontal en móviles */
 }
 
 /* Encabezado */
@@ -36,15 +41,21 @@ body {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo-container {
   margin-right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .app-logo {
   height: 60px;
   width: auto;
+  max-width: 100%; /* Asegura que el logo no se desborde */
 }
 
 .app-title {
@@ -57,12 +68,16 @@ body {
   font-size: 1.8rem;
   color: var(--primary-color);
   font-weight: 600;
+  line-height: 1.2; /* Mejora la legibilidad */
+  word-wrap: break-word; /* Evita que el texto se desborde */
 }
 
 .title-sub {
   font-size: 1rem;
   color: var(--text-light);
   font-weight: 400;
+  line-height: 1.4; /* Mejora la legibilidad */
+  word-wrap: break-word; /* Evita que el texto se desborde */
 }
 
 /* Contenido principal */
@@ -83,9 +98,11 @@ body {
   color: var(--text-light);
   font-size: 0.9rem;
   border-top: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Responsive */
+/* Responsive - Tablets */
 @media (max-width: 768px) {
   .app-header {
     flex-direction: column;
@@ -104,5 +121,84 @@ body {
   
   .title-main {
     font-size: 1.5rem;
+  }
+  
+  .app-content {
+    padding: 0.75rem;
+  }
+}
+
+/* Responsive - Móviles pequeños */
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.75rem;
+  }
+  
+  .app-logo {
+    height: 50px; /* Logo más pequeño para móviles */
+  }
+  
+  .title-main {
+    font-size: 1.3rem;
+  }
+  
+  .title-sub {
+    font-size: 0.9rem;
+  }
+  
+  .app-content {
+    padding: 0.5rem;
+  }
+  
+  .app-footer {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Ajustes para dispositivos muy pequeños */
+@media (max-width: 320px) {
+  .app-logo {
+    height: 40px;
+  }
+  
+  .title-main {
+    font-size: 1.1rem;
+  }
+  
+  .title-sub {
+    font-size: 0.8rem;
+  }
+}
+
+/* Ajustes para orientación horizontal en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-header {
+    flex-direction: row;
+    padding: 0.5rem;
+  }
+  
+  .logo-container {
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
+  
+  .app-logo {
+    height: 40px;
+  }
+  
+  .app-content {
+    padding-top: 0.5rem;
+  }
+}
+
+/* Mejoras de accesibilidad para toques en móviles */
+@media (hover: none) {
+  /* Aumenta el área de toque para elementos interactivos */
+  button, 
+  a {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem 1rem;
   }
 }
