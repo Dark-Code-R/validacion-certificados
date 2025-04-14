@@ -1,0 +1,273 @@
+/* Estilos generales */
+:root {
+    --primary-color: #d05471;
+    --primary-light: rgba(208, 84, 113, 0.1);
+    --success-color: #059669;
+    --success-light: #D1FAE5;
+    --error-color: #DC2626;
+    --error-light: #FEE2E2;
+    --warning-color: #F59E0B;
+    --warning-light: #FEF3C7;
+    --info-color: #3B82F6;
+    --info-light: #EFF6FF;
+    --text-color: #333;
+    --text-light: #666;
+    --background-color: #f5f5f5;
+    --card-background: white;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Contenedor principal */
+  .certificado-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+  
+  /* Estilos para el encabezado de éxito */
+  .success-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--primary-light);
+  }
+  
+  .success-icon {
+    width: 48px;
+    height: 48px;
+    margin-right: 1rem;
+  }
+  
+  .success-text h2 {
+    color: var(--success-color);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+  }
+  
+  .success-text p {
+    color: var(--text-light);
+    margin: 0;
+  }
+  
+  /* Contenedor de páginas PDF */
+  .pdf-container {
+    margin: 2rem 0;
+  }
+  
+  .pdf-page {
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  
+  .page-number {
+    text-align: center;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Pie de página */
+  .certificado-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--primary-light);
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  
+  .certificado-footer p {
+    margin: 0.5rem 0;
+  }
+  
+  /* Estilos para el componente de carga */
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+  }
+  
+  .loading-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .loading-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .spinner {
+    stroke: var(--primary-color);
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    transform-origin: center;
+    animation: spinner 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  
+  @keyframes spinner {
+    0% {
+      stroke-dashoffset: 60;
+      transform: rotate(0);
+    }
+    50% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 60;
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loading-card h3 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  .progress-bar {
+    height: 8px;
+    background-color: var(--background-color);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+  
+  .loading-card p {
+    color: var(--text-light);
+    margin: 0;
+    min-height: 1.5em; /* Evitar saltos en la altura cuando cambia el texto */
+  }
+  
+  /* Estilos para el componente de error */
+  .error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+  }
+  
+  .error-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .error-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .error-card h3 {
+    color: var(--error-color);
+    margin-bottom: 1rem;
+  }
+  
+  .error-card p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+  
+  /* Nuevos estilos para detalles de error */
+  .error-details {
+    background-color: var(--info-light);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  
+  .error-suggestion {
+    color: var(--info-color);
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  
+  .error-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  
+  .retry-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .retry-button:hover {
+    background-color: #b8405e;
+  }
+  
+  .help-button {
+    background-color: var(--info-light);
+    color: var(--info-color);
+    border: 1px solid var(--info-color);
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .help-button:hover {
+    background-color: var(--info-color);
+    color: white;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .certificado-container {
+      padding: 1rem;
+      margin: 1rem;
+    }
+    
+    .success-header {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .success-icon {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+    
+    .error-actions {
+      flex-direction: column;
+    }
+    
+    .retry-button, .help-button {
+      width: 100%;
+    }
+  }

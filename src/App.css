@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+/* Estilos generales */
+:root {
+  --primary-color: #d05471;
+  --primary-dark: #b8405e;
+  --primary-light: rgba(208, 84, 113, 0.1);
+  --text-color: #333;
+  --text-light: #666;
+  --background-color: #f5f5f5;
+  --card-background: white;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Contenedor principal */
+.app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Encabezado */
+.app-header {
+  background-color: white;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
 }
 
-.App-link {
-  color: #61dafb;
+.logo-container {
+  margin-right: 1.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.app-logo {
+  height: 60px;
+  width: auto;
+}
+
+.app-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-main {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.title-sub {
+  font-size: 1rem;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+/* Contenido principal */
+.app-content {
+  flex: 1;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Pie de página */
+.app-footer {
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .logo-container {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .app-title {
+    align-items: center;
+  }
+  
+  .title-main {
+    font-size: 1.5rem;
   }
 }
