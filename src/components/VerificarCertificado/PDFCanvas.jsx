@@ -1,19 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import AlertaCopia from './UI/AlertaCopia';
 
 const PDFCanvas = ({ pdf, numero }) => {
   const canvasRef = useRef(null);
-  const [documentId, setDocumentId] = useState('');
-
-  // Generar un ID único para el documento
-  useEffect(() => {
-    const generateDocumentId = () => {
-      const timestamp = new Date().getTime();
-      const random = Math.floor(Math.random() * 10000);
-      return `GAMC-${timestamp}-${random}`;
-    };
-    
-    setDocumentId(generateDocumentId());
-  }, []);
+  const [validationText] = useState('USO EXCLUSIVO DE VERIFICACIÓN');
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const renderPage = async () => {
@@ -36,7 +27,45 @@ const PDFCanvas = ({ pdf, numero }) => {
     };
 
     renderPage();
-  }, [pdf, numero, documentId]);
+
+    // Añadir listeners para detectar intentos de copia
+    const handleCopyAttempt = (e) => {
+      e.preventDefault();
+      setShowAlert(true);
+    };
+
+    document.addEventListener('copy', handleCopyAttempt);
+    document.addEventListener('contextmenu', handleCopyAttempt);
+    
+    // También podemos detectar teclas como Print Screen
+    const handleKeyDown = (e) => {
+      // Detectar Print Screen (código 44)
+      if (e.keyCode === 44) {
+        e.preventDefault();
+        setShowAlert(true);
+      }
+      
+      // Detectar Ctrl+P (imprimir)
+      if (e.ctrlKey && e.keyCode === 80) {
+        e.preventDefault();
+        setShowAlert(true);
+      }
+      
+      // Detectar Ctrl+S (guardar)
+      if (e.ctrlKey && e.keyCode === 83) {
+        e.preventDefault();
+        setShowAlert(true);
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('copy', handleCopyAttempt);
+      document.removeEventListener('contextmenu', handleCopyAttempt);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [pdf, numero, validationText]);
 
   // Función principal para aplicar marca de agua con múltiples capas de seguridad
   const applySecureWatermark = (context, width, height) => {
@@ -48,9 +77,6 @@ const PDFCanvas = ({ pdf, numero }) => {
     
     // Capa 3: Sello grande central con elementos holográficos
     drawEnhancedCentralSeal(context, width, height);
-    
-    // Capa 4: Marca de agua en esquina con información dinámica
-    drawSecureCornerWatermark(context, width, height);
     
     // Capa 5: Microtexto (texto muy pequeño difícil de reproducir)
     drawMicrotext(context, width, height);
@@ -67,31 +93,58 @@ const PDFCanvas = ({ pdf, numero }) => {
     context.save();
   
     // Texto principal
-    const text = 'VALIDADO - G.A.M. COCHABAMBA';
-    const secondaryText = documentId;
-    const fontSize = 26;
-    const smallFontSize = 14;
-    const spacing = 160;
+    const text = 'VALIDADO-GAMC-2024'; // Añadido espacio para mejor legibilidad
+    const secondaryText = validationText;
+    const fontSize = 28;
+    const smallFontSize = 18; // Tamaño más grande para mejor legibilidad
+    const spacing = 180;
   
     context.font = `bold ${fontSize}px Arial`;
     context.fillStyle = '#d05471';
-    context.globalAlpha = 0.08; // Más visible
+    context.globalAlpha = 0.15;
     context.textAlign = 'center';
     context.textBaseline = 'middle';
   
     // Aplicar rotación a toda la grilla
     context.translate(width / 2, height / 2);
-    context.rotate(-Math.PI / 5);
-  
-    // Dibujar patrón principal
-    for (let y = -height * 1.5; y < height * 1.5; y += spacing) {
-      for (let x = -width * 1.5; x < width * 1.5; x += spacing) {
-        context.fillText(text, x, y);
-        
-        // Añadir texto secundario con ID único
-        context.font = `${smallFontSize}px Arial`;
-        context.fillText(secondaryText, x, y + 25);
+    context.rotate(-Math.PI / 5); // Rotación original (~36 grados)
+
+    const columnSpacing = spacing * 1.8; // Más espacio horizontal
+    const rowSpacing = spacing * 1.5; // Más espacio vertical
+
+    // Formatear el texto principal con separadores
+    const formattedMainText = "- " + text + " -"; // Añadir estrellas como separadores visuales
+
+    // Formatear el texto secundario con separadores
+    const formattedSecondaryText = "- " + secondaryText + " -"; // Añadir guiones como separadores visuales
+
+    for (let y = -height * 1.5; y < height * 1.5; y += rowSpacing) {
+      for (let x = -width * 1.5; x < width * 1.5; x += columnSpacing) {
+        // Texto principal con fondo y separadores
         context.font = `bold ${fontSize}px Arial`;
+        context.fillStyle = '#d05471';
+        
+        // Dibujar un fondo sutil para el texto principal
+        const mainTextWidth = context.measureText(formattedMainText).width;
+        context.fillStyle = 'rgba(255, 255, 255, 0.4)'; // Fondo semitransparente
+        context.fillRect(x - mainTextWidth/2 - 10, y - fontSize/2 - 5, mainTextWidth + 20, fontSize + 10);
+        
+        // Dibujar el texto principal
+        context.fillStyle = '#d05471';
+        context.fillText(formattedMainText, x, y);
+
+        // Texto secundario con separadores visuales
+        context.font = `bold ${smallFontSize}px Arial`;
+        context.fillStyle = '#333'; // Contraste alto para visibilidad
+        
+        // Dibujar un fondo sutil para el texto secundario
+        const secondaryTextWidth = context.measureText(formattedSecondaryText).width;
+        context.fillStyle = 'rgba(255, 255, 255, 0.5)'; // Fondo semitransparente
+        context.fillRect(x - secondaryTextWidth/2 - 10, y + 40 - smallFontSize/2 - 5, secondaryTextWidth + 20, smallFontSize + 10);
+        
+        // Dibujar el texto secundario
+        context.fillStyle = '#333';
+        context.fillText(formattedSecondaryText, x, y + 40);
       }
     }
   
@@ -172,7 +225,7 @@ const PDFCanvas = ({ pdf, numero }) => {
     context.stroke();
     
     // Texto central
-    context.fillStyle = 'rgba(208, 84, 113, 0.6)'; // Más visible
+    context.fillStyle = 'rgba(208, 84, 113, 0.7)';
     context.font = 'bold 24px Arial';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
@@ -185,10 +238,6 @@ const PDFCanvas = ({ pdf, numero }) => {
     context.font = '16px Arial';
     context.fillText(fecha, 0, 45);
     context.fillText(hora, 0, 65);
-    
-    // ID único del documento
-    context.font = '12px Arial';
-    context.fillText(documentId, 0, 85);
     
     // Añadir elementos de seguridad adicionales
     // Líneas radiales
@@ -206,48 +255,13 @@ const PDFCanvas = ({ pdf, numero }) => {
     context.restore();
   };
 
-  // Marca de agua en esquina mejorada
-  const drawSecureCornerWatermark = (context, width, height) => {
-    context.save();
-    
-    // Posicionar en la esquina inferior derecha
-    context.translate(width - 120, height - 80);
-    
-    // Dibujar rectángulo con bordes redondeados y gradiente
-    const gradient = context.createLinearGradient(-100, -30, 100, 30);
-    gradient.addColorStop(0, 'rgba(208, 84, 113, 0.15)');
-    gradient.addColorStop(0.5, 'rgba(113, 84, 208, 0.15)');
-    gradient.addColorStop(1, 'rgba(208, 84, 113, 0.15)');
-    
-    context.beginPath();
-    roundedRect(context, -100, -30, 200, 60, 10);
-    context.fillStyle = gradient;
-    context.fill();
-    context.strokeStyle = 'rgba(208, 84, 113, 0.5)';
-    context.lineWidth = 2;
-    context.stroke();
-    
-    // Texto de validación
-    context.fillStyle = 'rgba(208, 84, 113, 0.9)'; // Más visible
-    context.font = 'bold 18px Arial';
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-    context.fillText('VALIDADO - GAMC', 0, -10);
-    
-    // Añadir ID único
-    context.font = '12px Arial';
-    context.fillText(documentId, 0, 10);
-    
-    context.restore();
-  };
-
   // Microtexto (texto muy pequeño difícil de reproducir en fotocopias)
   const drawMicrotext = (context, width, height) => {
     context.save();
     
     const microText = 'GOBIERNO AUTÓNOMO MUNICIPAL DE COCHABAMBA - DOCUMENTO OFICIAL - NO VÁLIDO SIN SELLO - ';
     context.font = '4px Arial';
-    context.fillStyle = 'rgba(208, 84, 113, 0.5)';
+    context.fillStyle = 'rgba(208, 84, 113, 0.6)';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     
@@ -353,32 +367,21 @@ const PDFCanvas = ({ pdf, numero }) => {
     context.restore();
   };
 
-  // Función auxiliar para dibujar rectángulos con bordes redondeados
-  const roundedRect = (ctx, x, y, width, height, radius) => {
-    ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-    ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
-    ctx.closePath();
-  };
-
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        marginBottom: '1rem',
-        pointerEvents: 'none',
-        userSelect: 'none',
-        borderRadius: '8px',
-        boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-      }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        style={{
+          marginBottom: '1rem',
+          pointerEvents: 'none',
+          userSelect: 'none',
+          borderRadius: '8px',
+          boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+        }}
+      />
+      
+      {showAlert && <AlertaCopia onClose={() => setShowAlert(false)} />}
+    </>
   );
 };
 
