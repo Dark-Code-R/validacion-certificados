@@ -21,7 +21,7 @@ import CertificadoFooter from './CertificadoFooter';
 GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 // Configuración de la API
-const API_BASE = process.env.REACT_APP_API_BASE || 'https://qrback.catastrocochabamba.com';
+const API_BASE = process.env.REACT_APP_API_BASE;
 const API_ENDPOINT = `${API_BASE}/obtenerCertificacionPDF`;
 
 /**

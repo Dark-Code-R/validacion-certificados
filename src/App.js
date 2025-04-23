@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
 import VerificarCertificadoUI from './components/VerificarCertificado/UI/VerificarCertificadoUI';
-import './App.css'; // Asegúrate de crear este archivo CSS
-import banner from './assets/images/banner.png';
+import './App.css'; 
 
 const AppWrapper = () => {
   const [searchParams] = useSearchParams();

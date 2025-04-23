@@ -1,70 +1,101 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ✅ Verificador de Certificados - GAMC
 
-## Available Scripts
+Aplicación web desarrollada en React que permite verificar la validez de certificados emitidos por el Gobierno Autónomo Municipal de Cochabamba (GAMC), a través de un sistema basado en código QR. Incluye protección contra copias, animaciones, marcas de agua de alta seguridad, y soporte para múltiples entornos (desarrollo y producción).
 
-In the project directory, you can run:
+## 📦 Características
 
-### `npm start`
+- **Verificación segura**: Validación de certificados mediante códigos QR únicos
+- **Visualización protegida**: Renderizado de certificados en formato PDF desde el backend oficial
+- **Seguridad avanzada**:
+  - Marcas de agua dinámicas de alta seguridad
+  - Protección contra impresión, copia y capturas de pantalla
+  - Patrones visuales tipo guilloche y efectos moiré
+- **Experiencia de usuario mejorada**:
+  - Animaciones fluidas usando anime.js
+  - Interfaz responsiva para dispositivos móviles y escritorio
+  - Indicadores de estado claros durante la verificación
+- **Arquitectura robusta**:
+  - Control de entorno mediante variables en .env
+  - Separación clara de componentes UI y lógica
+  - Hooks personalizados para funcionalidades específicas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Instalación
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerrequisitos
 
-### `npm test`
+- Node.js (v14.x o superior)
+- npm (v6.x o superior)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pasos de instalación
 
-### `npm run build`
+1. **Clonar el repositorio**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone [URL_DEL_REPOSITORIO]
+cd verificador-certificados
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Instalar dependencias**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install
+```
 
-### `npm run eject`
+3. **Configurar variables de entorno**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Crea un archivo `.env` en la raíz del proyecto:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```env
+PORT=8010
+REACT_APP_API_BASE=[URL_BASE_API]
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> **Nota**: Ajusta `REACT_APP_API_BASE` según el entorno (producción/desarrollo).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 💻 Uso
 
-## Learn More
+### Desarrollo local
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+La aplicación estará disponible en [http://localhost:8010](http://localhost:8010)
 
-### Code Splitting
+## 🛠️ Tecnologías utilizadas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- [React](https://reactjs.org/) - Framework de UI
+- [PDF.js](https://mozilla.github.io/pdf.js/) - Renderizado de PDFs
+- [anime.js](https://animejs.com/) - Animaciones
+- [React Router](https://reactrouter.com/) - Enrutamiento
 
-### Analyzing the Bundle Size
+## 📋 Estructura del proyecto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+verificador-certificados/
+├── public/                  # Archivos estáticos
+├── src/
+│   ├── components/          # Componentes React
+│   │   ├── VerificarCertificado/  # Componente principal
+│   │   │   ├── UI/          # Componentes de interfaz
+│   │   │   └── hooks/       # Hooks personalizados
+│   ├── assets/              # Imágenes y recursos
+│   ├── utils/               # Utilidades y helpers
+│   ├── App.jsx              # Componente raíz
+│   └── index.js             # Punto de entrada
+├── .env                     # Variables de entorno
+└── README.md                # Este archivo
+```
 
-### Making a Progressive Web App
+## 👥 Equipo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Desarrollo Frontend**: Rodrigo Dyker (Pasante de Desarrollo)
+- **Supervisión**: Equipo de Desarrollo GAMC
+- **Diseño**: Departamento de Diseño GAMC
+- **Contacto**: rodrigo.darkcode (at) gmail.com
 
-### Advanced Configuration
+## 📄 Licencia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Este proyecto es propiedad del Gobierno Autónomo Municipal de Cochabamba. Todos los derechos reservados.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
