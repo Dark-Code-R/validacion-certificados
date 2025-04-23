@@ -1,7 +1,13 @@
 
-# ✅ Verificador de Certificados - GAMC
+# ✅ Verificador de Certificados - Sistema QR
 
-Aplicación web desarrollada en React que permite verificar la validez de certificados emitidos por el Gobierno Autónomo Municipal de Cochabamba (GAMC), a través de un sistema basado en código QR. Incluye protección contra copias, animaciones, marcas de agua de alta seguridad, y soporte para múltiples entornos (desarrollo y producción).
+![Versión](https://img.shields.io/badge/versión-1.0.0-blue)
+![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react)
+![Licencia](https://img.shields.io/badge/licencia-MIT-green)
+
+Aplicación web desarrollada en React que permite verificar la validez de certificados a través de un sistema basado en código QR. Incluye protección contra copias, animaciones, marcas de agua de alta seguridad, y soporte para múltiples entornos (desarrollo y producción).
+
+Este proyecto fue desarrollado por mí como parte de mi experiencia profesional en desarrollo frontend, implementando soluciones de seguridad avanzadas para documentos digitales.
 
 ## 📦 Características
 
@@ -32,7 +38,7 @@ Aplicación web desarrollada en React que permite verificar la validez de certif
 1. **Clonar el repositorio**
 
 ```bash
-git clone [URL_DEL_REPOSITORIO]
+git clone https://github.com/Dark-Code-R/verificador-certificados.git
 cd verificador-certificados
 ```
 
@@ -48,10 +54,10 @@ Crea un archivo `.env` en la raíz del proyecto:
 
 ```env
 PORT=8010
-REACT_APP_API_BASE=[URL_BASE_API]
+REACT_APP_API_BASE=https://tu-api-backend.com
 ```
 
-> **Nota**: Ajusta `REACT_APP_API_BASE` según el entorno (producción/desarrollo).
+> **Nota**: Ajusta `REACT_APP_API_BASE` según tu entorno (producción/desarrollo).
 
 ## 💻 Uso
 
@@ -88,14 +94,17 @@ verificador-certificados/
 └── README.md                # Este archivo
 ```
 
-## 👥 Equipo
+## 👤 Autor
 
-- **Desarrollo Frontend**: Rodrigo Dyker (Pasante de Desarrollo)
-- **Supervisión**: Equipo de Desarrollo GAMC
-- **Diseño**: Departamento de Diseño GAMC
-- **Contacto**: rodrigo.darkcode (at) gmail.com
+- **Carlos Rodrigo Condori R.** - Desarrollador Frontend
+- **Contacto**: rodrigo.darkcode@gmail.com
+- **GitHub**: [Dark-Code-R](https://github.com/Dark-Code-R)
+- **LinkedIn**: [Carlos Rodrigo Condori R.](https://www.linkedin.com/in/carlos-rodrigo-condori-r-1377aa339/)
 
 ## 📄 Licencia
 
-Este proyecto es propiedad del Gobierno Autónomo Municipal de Cochabamba. Todos los derechos reservados.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
+---
+
+Desarrollado con ❤️ por Carlos Rodrigo Condori R. (Dark-Code-R)
